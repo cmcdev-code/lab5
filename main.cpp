@@ -63,9 +63,11 @@ int main(void){
 void fInput(ifstream& in,char a[]){
 
     string localStr="";
-
-    getline(in,localStr);
-
+    string localStr2="";
+    while(!in.eof()){
+        getline(in,localStr2);
+        localStr=localStr+localStr2;
+    }
     for(int i=0;i<localStr.length();i++){
         a[i]=localStr[i];  
     }
@@ -104,8 +106,8 @@ void encryptedFile_uncryptedFile_(message& localObj,char a[]){
         outOf_file(localObj);
     }else{
         cout<<"Error in opening file \n";
-        
     }
+    
     in.close();
 }
 
@@ -175,7 +177,7 @@ void outOf_file(message& localObj){
     getline(cin,localStr);
     
     ofstream out;
-
+    out.open(localStr);
     if(out.is_open()){//checks that the file is open
         localObj.showWords(out);//if the file is open it will output to the file 
     }else{
